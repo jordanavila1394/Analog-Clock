@@ -30,33 +30,47 @@
     </div>
     <script type="text/javascript">
     var diallines= document.getElementsByClassName('diallines');
-    var clockE1= document.getElementsByClassName('clock')[0];
+    // https://developer.mozilla.org/it/docs/Web/API/Document/getElementsByClassName
+    //Il metodo getElementsByClassName dell'interfaccia Document 
+    //restituisce un array-like object di tutti gli elementi figli che hanno le classi "diallines".
 
+    var clockE1= document.getElementsByClassName('clock')[0];
+    //Ottenere il primo elemento con classe 'clock' o indefinito se non ci sono elementi corrispondenti:
+
+
+    //Faccio un ciclo di 60 
+    //Mi serve per creare 60 div e di ruotarli in modo da creare le linee dell'orologio
     for(var i=1; i<60; i++){
         clockE1.innerHTML +="<div class='diallines'></div>";
+        //La proprietà Element innerHTML ottiene o imposta il markup HTML o XML contenuto all'interno dell'elemento.
         diallines[i].style.transform ="rotate(" + 6 * i +"deg)";
+        //diallines contiene tutte le lineette del orologio
+        //a cui setto lo stile di ruotare di 6 gradi moltiplicato per l'indice.
+        diallines[i].style.background ="black";
+
     }
     function clock(){
-        var weekday = new Array(7),
-        d = new Date(),
-        h = d.getHours(),
-        m = d.getMinutes(),
-        s = d.getSeconds(),
-        date = d.getDate(),
-        month = d.getMonth() + 1,
-        year = d.getYear(),
-        yearFull = d.getFullYear(),
-        hDeg = h * 30 + m * (360/720),
-        mDeg = m * 6 + s * (360/3600),
-        sDeg = s * 6,
+        var weekday = new Array(7), //Creo un array con dimensione 7 per contenere i giorni della settimana
+        d = new Date(), // Creo la data di oggi
+        h = d.getHours(), //Estraggo l'ora
+        m = d.getMinutes(),  //Estraggo i minuti
+        s = d.getSeconds(),  //Estraggo secondi
+        date = d.getDate(), //Estraggo data, numero giorno del mese
+        month = d.getMonth() + 1, //Estraggo mese, numero mese
+        year = d.getYear(), //Estraggo anno corrente - 1900
+        yearFull = d.getFullYear(), // Estraggo l'anno corrente
+        hDeg = h * 30 + m * (360/720), // Definisco i gradi delle lancette delle ore
+        mDeg = m * 6 + s * (360/3600), // Definisco i gradi delle lancette dei minuti
+        sDeg = s * 6, // Definisco i dati della lancetta dei secondi
+
+    
 
 
-        hE1 = document.querySelector('.hour-hand'),
-        mE1 = document.querySelector('.minute-hand'),
+        hE1 = document.querySelector('.hour-hand'), //Il metodo Document querySelector() ritorna il primo Element 
+        mE1 = document.querySelector('.minute-hand'), //all'interno del documento che corrisponde al selettore specificato o al gruppo di selettori.
         sE1 = document.querySelector('.second-hand'),
         dateE1 = document.querySelector('.date'),
         dayE1 = document.querySelector('.day');
-
         weekday[0]="Domenica";
         weekday[1]="Lunedì";
         weekday[2]="Martedì";
@@ -75,7 +89,11 @@
     function pad(n){return n<10 ? '0'+n : n}
 
     setInterval("clock()", 1000);
-        
+    /*The setInterval() method calls a function or evaluates an expression at specified intervals (in milliseconds).
+    The setInterval() method will continue calling the function until clearInterval() is called, or the window is closed.
+    The ID value returned by setInterval() is used as the parameter for the clearInterval() method.
+    Tip: 1000 ms = 1 second.
+    Tip: To execute a function only once, after a specified number of milliseconds, use the setTimeout() method.*/
     </script>
 
     
